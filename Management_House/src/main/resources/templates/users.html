@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/0faddc1af8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
+    <title>Quản lý nhà trọ</title>
+</head>
+<body>
+<section id="sidebar">
+    <a href="#" class="brand">
+        <i class='bx bx-home-smile'></i>
+        <span class="text">Nhà trọ</span>
+    </a>
+    <ul class="side-menu top">
+        <li class="active">
+            <a href="/available_dashboard">
+                <i class='bx bxs-dashboard'></i>
+                <span class="text">Dashboard</span>
+            </a>
+        </li>
+        <li>
+            <a href="/available_houses">
+                <i class='bx bxs-home'></i>
+                <span class="text">Quản lý nhà trọ</span>
+            </a>
+        </li>
+        <li>
+            <a href="/available_rooms">
+                <i class='bx bxs-door-open'></i>
+                <span class="text">Quản lý phòng</span>
+            </a>
+        </li>
+        <li>
+            <a href="/available_facilitys">
+                <i class='bx bxs-spreadsheet'></i>
+                <span class="text">Quản lý dịch vụ</span>
+            </a>
+        </li>
+        <li>
+            <a href="/available_tenants">
+                <i class='bx bxs-user-detail'></i>
+                <span class="text">Quản lý người thuê</span>
+            </a>
+        </li>
+        <li>
+            <a href="/available_contracts">
+                <i class='bx bxs-detail'></i>
+                <span class="text">Quản lý hợp đồng</span>
+            </a>
+        </li>
+        <li>
+            <a href="/available_bills">
+                <i class='bx bxs-food-menu'></i>
+                <span class="text">Quản lý hóa đơn</span>
+            </a>
+        </li>
+        <li>
+            <a href="/available_revenue">
+                <i class='bx bxs-plus-square'></i>
+                <span class="text">Quản lý phiếu thu</span>
+            </a>
+        </li>
+        <li>
+            <a href="/available_expenditure">
+                <i class='bx bxs-minus-square' ></i>
+                <span class="text">Quản lý phiếu chi</span>
+            </a>
+        </li>
+        <li>
+            <a href="/logout" class="logout">
+                <i class='bx bx-log-out'></i>
+                <span class="text">Đăng xuất</span>
+            </a>
+        </li>
+    </ul>
+</section>
+
+
+
+<section id="content">
+    <nav>
+        <i class='bx bx-menu'></i>
+        <a href="#" class="nav-link">ChinhLee</a>
+        <form action="#">
+            <div class="form-input">
+                <input type="search" placeholder="Nhập thông tin tìm kiếm...">
+                <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+            </div>
+        </form>
+        <a href="/available_users">
+            <i class='bx bx-user'></i>
+            <span sec:authentication="principal.username">User</span>
+        </a>
+    </nav>
+
+
+    <main>
+        <div class="head-title">
+            <div class="left">
+                <h1>Thông tin tài khoản</h1>
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="#">Trang chủ</a>
+                    </li>
+                    <li><i class='bx bx-chevron-right'></i></li>
+                    <li>
+                        <a class="active" href="#">Tài khoản</a>
+                    </li>
+                </ul>
+            </div>
+            <a href="#" class="btn-download">
+                <i class='bx bxs-cloud-download' ></i>
+                <span class="text">Download PDF</span>
+            </a>
+        </div>
+        <div class="house">
+            <table style="text-align: center">
+                <thead>
+                <tr>
+                    <th scope="col">Mã tài khoản</th>
+                    <th scope="col">Số CCCD</th>
+                    <th scope="col">Họ và tên</th>
+                    <th scope="col">Giới tính</th>
+                    <th scope="col">Ngày sinh</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Số điện thoại</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="text-align: center" th:each="user : ${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.cccd}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.gender}"></td>
+                    <td th:text="${user.birthday}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.phone}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+</section>
+<!--<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<script src="/static/js/script.js"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

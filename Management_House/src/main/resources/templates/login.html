@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng nhập</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+          crossorigin="anonymous">
+    <style>
+        .eye {
+            position: absolute;
+            right: 30px;
+            top: 67%;
+            transform: translateY(-67%);
+            cursor: pointer;
+            max-width: 18px;
+        }
+        .hidden{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" th:href="@{/index}">Đăng ký và đăng nhập</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" th:href="@{/register}">Đăng ký</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br/><br/>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+
+            <div th:if="${param.error}">
+                <div class="alert alert-danger">Thông tin đăng nhập không hợp lệ!</div>
+            </div>
+            <div th:if="${param.logout}">
+                <div class="alert alert-success">Bạn đã đăng xuất!</div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Đăng nhập</h2>
+                </div>
+                <div class="card-body">
+                    <form
+                            method="post"
+                            role="form"
+                            th:action="@{/login}"
+                            class="form-horizontal"
+                    >
+                        <div class="form-group mb-3">
+                            <label class="control-label"> Email</label>
+                            <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    class="form-control"
+                                    placeholder="Nhập email"
+                            />
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label class="control-label">Mật khẩu</label>
+                            <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    class="form-control"
+                                    placeholder="Nhập mật khẩu"
+                            />
+                            <svg xmlns="http://www.w3.org/2000/svg" class="eye eye-open hidden" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+                                <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+                            </svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="eye eye-close" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z" clip-rule="evenodd" />
+                                <path d="M12.454 16.697L9.75 13.992a4 4 0 01-3.742-3.741L2.335 6.578A9.98 9.98 0 00.458 10c1.274 4.057 5.065 7 9.542 7 .847 0 1.669-.105 2.454-.303z" />
+                            </svg>
+
+
+                        </div>
+                        <div class="form-group mb-3">
+                            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                            <span> Bạn chưa có tài khoản?
+                                <a th:href="@{/register}">Đăng ký tại đây!</a>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const formControl = document.getElementById("password");
+    const eyeOpen = document.querySelector(".eye-open");
+    const eyeClose = document.querySelector(".eye-close");
+    eyeOpen.addEventListener("click", function () {
+        eyeOpen.classList.add("hidden");
+        eyeClose.classList.remove("hidden");
+        formControl.setAttribute("type","password");
+    });
+    eyeClose.addEventListener("click", function () {
+        eyeOpen.classList.remove("hidden");
+        eyeClose.classList.add("hidden");
+        formControl.setAttribute("type","text");
+    });
+</script>
+</body>
+</html>
